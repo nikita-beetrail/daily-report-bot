@@ -54,7 +54,7 @@ export function AppShell() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl px-4 pb-6 pt-[calc(env(safe-area-inset-top)+8.5rem)] sm:pt-[calc(env(safe-area-inset-top)+6.5rem)]">
+      <main className="mx-auto w-full max-w-3xl px-4 pb-6 pt-[calc(env(safe-area-inset-top)+10rem)] sm:pt-[calc(env(safe-area-inset-top)+7rem)]">
         <Outlet />
       </main>
     </div>

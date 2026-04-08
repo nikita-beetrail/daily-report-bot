@@ -187,7 +187,7 @@ export function ReportCreatePage() {
             Заполните день и сохраните черновик или “отправьте” (пока без интеграций).
           </p>
         </div>
-        <Button type="button" variant="ghost" onClick={onReset}>
+        <Button type="button" variant="ghost" onClick={onReset} className="w-full sm:w-auto">
           Очистить
         </Button>
       </div>
@@ -206,8 +206,8 @@ export function ReportCreatePage() {
 
       <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
         <Card className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="sm:col-span-2">
+          <div className="grid grid-cols-1 gap-4">
+            <div>
               <div className="mb-1 text-sm font-medium">Имя сотрудника</div>
               <Input
                 type="text"
