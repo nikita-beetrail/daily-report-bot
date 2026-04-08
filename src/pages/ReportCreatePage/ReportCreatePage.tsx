@@ -37,6 +37,7 @@ const STATUS_OPTIONS = [
 ] as const;
 
 type FormValues = DailyReportDraft;
+type SendStatus = "success" | "error" | null;
 
 const EMPTY_DRAFT: DailyReportDraft = {
   employeeName: "",
@@ -82,6 +83,7 @@ export function ReportCreatePage() {
   const [message, setMessage] = React.useState<string | null>(null);
   const [savedDraft, setSavedDraft] = React.useState<FormValues | null>(null);
   const [showRestoreModal, setShowRestoreModal] = React.useState(false);
+  const [sendStatus, setSendStatus] = React.useState<SendStatus>(null);
   const isHydratedRef = React.useRef(false);
 
   const values = watch();
@@ -160,12 +162,12 @@ export function ReportCreatePage() {
     try {
       await sendTelegramReport(v, projectName);
       saveSentReport(v, projectName);
-      setMessage("Отчёт отправлен ✅");
-      window.setTimeout(() => setMessage(null), 2500);
+      setSendStatus("success");
+      window.setTimeout(() => setSendStatus(null), 3000);
     } catch {
       writeLocalStorageJson(DRAFT_STORAGE_KEY, v);
-      setMessage("Ошибка отправки ❌");
-      window.setTimeout(() => setMessage(null), 3000);
+      setSendStatus("error");
+      window.setTimeout(() => setSendStatus(null), 3000);
     }
   });
 
@@ -350,6 +352,34 @@ export function ReportCreatePage() {
               </Button>
             </div>
           </Card>
+        </div>
+      ) : null}
+
+      {sendStatus ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+          <div
+            className={
+              sendStatus === "success"
+                ? "w-full max-w-md rounded-xl border border-emerald-500/40 bg-emerald-500/10 p-8 text-center"
+                : "w-full max-w-md rounded-xl border border-rose-500/40 bg-rose-500/10 p-8 text-center"
+            }
+          >
+            {sendStatus === "success" ? (
+              <>
+                <div className="text-5xl">✅</div>
+                <div className="mt-4 text-xl font-semibold text-emerald-300">
+                  Отчёт успешно отправлен!
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-5xl">❌</div>
+                <div className="mt-4 text-xl font-semibold text-rose-300">
+                  Ошибка отправки ❌ Попробуйте ещё раз
+                </div>
+              </>
+            )}
+          </div>
         </div>
       ) : null}
     </div>
