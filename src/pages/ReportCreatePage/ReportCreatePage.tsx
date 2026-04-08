@@ -38,6 +38,7 @@ const STATUS_OPTIONS = [
 
 type FormValues = DailyReportDraft;
 type SendStatus = "success" | "error" | null;
+const DRAFT_INFO_TIMEOUT_MS = 120_000;
 
 const EMPTY_DRAFT: DailyReportDraft = {
   employeeName: "",
@@ -81,8 +82,6 @@ export function ReportCreatePage() {
   });
 
   const [message, setMessage] = React.useState<string | null>(null);
-  const [savedDraft, setSavedDraft] = React.useState<FormValues | null>(null);
-  const [showRestoreModal, setShowRestoreModal] = React.useState(false);
   const [sendStatus, setSendStatus] = React.useState<SendStatus>(null);
   const isHydratedRef = React.useRef(false);
 
@@ -93,16 +92,17 @@ export function ReportCreatePage() {
     isHydratedRef.current = true;
     const storedDraft = readLocalStorageJson<FormValues>(DRAFT_STORAGE_KEY);
     if (storedDraft) {
-      setSavedDraft(storedDraft);
-      setShowRestoreModal(true);
+      reset(storedDraft);
+      setMessage("Черновик восстановлен автоматически");
+      window.setTimeout(() => setMessage(null), DRAFT_INFO_TIMEOUT_MS);
     }
-  }, []);
+  }, [reset]);
 
   React.useEffect(() => {
     const id = window.setInterval(() => {
       writeLocalStorageJson(DRAFT_STORAGE_KEY, values);
       setMessage("Черновик автосохранён");
-      window.setTimeout(() => setMessage(null), 1500);
+      window.setTimeout(() => setMessage(null), DRAFT_INFO_TIMEOUT_MS);
     }, 30_000);
     return () => window.clearInterval(id);
   }, [values]);
@@ -110,23 +110,8 @@ export function ReportCreatePage() {
   const onSaveDraft = handleSubmit((v) => {
     writeLocalStorageJson(DRAFT_STORAGE_KEY, v);
     setMessage("Черновик сохранён");
-    window.setTimeout(() => setMessage(null), 2000);
+    window.setTimeout(() => setMessage(null), DRAFT_INFO_TIMEOUT_MS);
   });
-
-  const onRestoreDraft = () => {
-    if (savedDraft) {
-      reset(savedDraft);
-      setMessage("Черновик восстановлен");
-      window.setTimeout(() => setMessage(null), 2000);
-    }
-    setShowRestoreModal(false);
-  };
-
-  const onDeclineRestore = () => {
-    localStorage.removeItem(DRAFT_STORAGE_KEY);
-    setSavedDraft(null);
-    setShowRestoreModal(false);
-  };
 
   const onSend = handleSubmit(async (v) => {
     clearErrors("root");
@@ -333,27 +318,6 @@ export function ReportCreatePage() {
           </Button>
         </div>
       </form>
-
-      {showRestoreModal ? (
-        <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/60 px-4 pb-4 sm:items-center sm:pb-0">
-          <Card className="z-50 w-full max-w-md space-y-4 rounded-t-xl sm:rounded-xl">
-            <div>
-              <h2 className="text-base font-semibold">Восстановить черновик?</h2>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                Найден несохранённый черновик отчёта в браузере.
-              </p>
-            </div>
-            <div className="flex justify-end gap-2">
-              <Button type="button" variant="secondary" onClick={onDeclineRestore}>
-                Нет
-              </Button>
-              <Button type="button" onClick={onRestoreDraft}>
-                Да
-              </Button>
-            </div>
-          </Card>
-        </div>
-      ) : null}
 
       {sendStatus ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
