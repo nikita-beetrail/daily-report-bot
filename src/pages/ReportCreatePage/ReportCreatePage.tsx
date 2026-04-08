@@ -183,7 +183,7 @@ export function ReportCreatePage() {
       <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-start">
         <div>
           <h1 className="text-lg font-semibold">Создание отчёта</h1>
-          <p className="mt-1 text-sm text-zinc-400 light:text-zinc-600">
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Заполните день и сохраните черновик или “отправьте” (пока без интеграций).
           </p>
         </div>
@@ -193,13 +193,13 @@ export function ReportCreatePage() {
       </div>
 
       {message ? (
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-sm text-zinc-200 light:border-zinc-200 light:bg-white light:text-zinc-700">
+        <div className="rounded-xl border border-zinc-200 bg-zinc-100 px-4 py-3 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-200">
           {message}
         </div>
       ) : null}
 
       {"root" in errors && (errors as any).root?.message ? (
-        <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200 light:text-rose-700">
+        <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-700 dark:text-rose-200">
           {(errors as any).root.message as string}
         </div>
       ) : null}
@@ -239,7 +239,7 @@ export function ReportCreatePage() {
           <div className="flex items-center justify-between gap-2">
             <div>
               <div className="text-sm font-semibold">Задачи</div>
-              <div className="text-xs text-zinc-400 light:text-zinc-600">
+              <div className="text-xs text-zinc-600 dark:text-zinc-400">
                 Можно добавлять и удалять строки.
               </div>
             </div>
@@ -257,7 +257,7 @@ export function ReportCreatePage() {
           ) : null}
 
           {fields.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-zinc-700 p-4 text-sm text-zinc-400 light:border-zinc-300 light:text-zinc-600">
+            <div className="rounded-xl border border-dashed border-zinc-300 p-4 text-sm text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
               Список задач пуст. Добавьте первую задачу.
             </div>
           ) : null}
@@ -266,10 +266,10 @@ export function ReportCreatePage() {
             {fields.map((f, idx) => (
               <div
                 key={f.id}
-                className="grid grid-cols-1 gap-2 rounded-xl border border-zinc-800 bg-zinc-950/40 p-3 sm:grid-cols-[1fr_220px_auto] sm:items-start light:border-zinc-200 light:bg-white"
+                className="grid grid-cols-1 gap-2 rounded-xl border border-zinc-200 bg-zinc-50 p-3 sm:grid-cols-[1fr_220px_auto] sm:items-start dark:border-zinc-800 dark:bg-zinc-950/40"
               >
                 <div>
-                  <div className="mb-1 text-xs font-medium text-zinc-300 light:text-zinc-700">
+                  <div className="mb-1 text-xs font-medium text-zinc-700 dark:text-zinc-300">
                     Задача
                   </div>
                   <Input
@@ -282,7 +282,7 @@ export function ReportCreatePage() {
                   />
                 </div>
                 <div>
-                  <div className="mb-1 text-xs font-medium text-zinc-300 light:text-zinc-700">
+                  <div className="mb-1 text-xs font-medium text-zinc-700 dark:text-zinc-300">
                     Статус
                   </div>
                   <Select
@@ -339,7 +339,7 @@ export function ReportCreatePage() {
           <Card className="z-50 w-full max-w-md space-y-4 rounded-t-xl sm:rounded-xl">
             <div>
               <h2 className="text-base font-semibold">Восстановить черновик?</h2>
-              <p className="mt-1 text-sm text-zinc-400 light:text-zinc-600">
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                 Найден несохранённый черновик отчёта в браузере.
               </p>
             </div>

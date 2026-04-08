@@ -34,7 +34,7 @@ export function ReportHistoryPage() {
     <div className="space-y-4">
       <div>
         <h1 className="text-lg font-semibold">История отчётов</h1>
-        <p className="mt-1 text-sm text-zinc-400 light:text-zinc-600">
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           Все отправленные отчёты, сохранённые локально.
         </p>
       </div>
@@ -43,7 +43,7 @@ export function ReportHistoryPage() {
         <div className="text-sm font-medium">Фильтры</div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div>
-            <div className="mb-1 text-xs text-zinc-400 light:text-zinc-600">От</div>
+            <div className="mb-1 text-xs text-zinc-600 dark:text-zinc-400">От</div>
             <Input
               type="date"
               value={dateFrom}
@@ -51,7 +51,7 @@ export function ReportHistoryPage() {
             />
           </div>
           <div>
-            <div className="mb-1 text-xs text-zinc-400 light:text-zinc-600">До</div>
+            <div className="mb-1 text-xs text-zinc-600 dark:text-zinc-400">До</div>
             <Input
               type="date"
               value={dateTo}
@@ -59,7 +59,7 @@ export function ReportHistoryPage() {
             />
           </div>
           <div>
-            <div className="mb-1 text-xs text-zinc-400 light:text-zinc-600">Проект</div>
+            <div className="mb-1 text-xs text-zinc-600 dark:text-zinc-400">Проект</div>
             <Select
               value={projectId}
               onChange={(e) => setProjectId(e.target.value)}
@@ -71,13 +71,13 @@ export function ReportHistoryPage() {
 
       {reports.length === 0 ? (
         <Card>
-          <div className="text-sm text-zinc-400 light:text-zinc-600">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             Пока нет отправленных отчётов.
           </div>
         </Card>
       ) : filteredReports.length === 0 ? (
         <Card>
-          <div className="text-sm text-zinc-400 light:text-zinc-600">
+          <div className="text-sm text-zinc-600 dark:text-zinc-400">
             По выбранным фильтрам отчёты не найдены.
           </div>
         </Card>
@@ -85,17 +85,17 @@ export function ReportHistoryPage() {
         <div className="space-y-2">
           {filteredReports.map((report) => (
             <Link key={report.id} to={`/history/${report.id}`} className="block">
-              <Card className="transition hover:border-zinc-600 light:hover:border-zinc-300">
+              <Card className="transition hover:border-zinc-300 dark:hover:border-zinc-600">
                 <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center sm:gap-4">
                   <div className="space-y-1">
                     <div className="text-sm font-semibold">
                       {formatRuDate(report.date)}
                     </div>
-                    <div className="text-sm text-zinc-300 light:text-zinc-700">
+                    <div className="text-sm text-zinc-700 dark:text-zinc-300">
                       {report.projectName}
                     </div>
                   </div>
-                  <div className="text-sm text-zinc-400 light:text-zinc-600 sm:text-right">
+                  <div className="text-sm text-zinc-600 dark:text-zinc-400 sm:text-right">
                     Задач: {report.tasks.length}
                   </div>
                 </div>

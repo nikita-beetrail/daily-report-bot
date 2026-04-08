@@ -40,11 +40,11 @@ export function ReportDetailsPage() {
 
       <Card className="space-y-3">
         <div className="text-sm">
-          <span className="text-zinc-400 light:text-zinc-600">Сотрудник: </span>
+          <span className="text-zinc-600 dark:text-zinc-400">Сотрудник: </span>
           <span>{report.employeeName}</span>
         </div>
         <div className="text-sm">
-          <span className="text-zinc-400 light:text-zinc-600">Проект: </span>
+          <span className="text-zinc-600 dark:text-zinc-400">Проект: </span>
           <span>{report.projectName}</span>
         </div>
         <div>
@@ -59,19 +59,19 @@ export function ReportDetailsPage() {
         </div>
         <div>
           <div className="mb-1 text-sm font-medium">Проблемы/блокеры</div>
-          <div className="text-sm text-zinc-300 light:text-zinc-700">
+          <div className="text-sm text-zinc-700 dark:text-zinc-300">
             {report.blockers.trim() || "—"}
           </div>
         </div>
         <div>
           <div className="mb-1 text-sm font-medium">План на завтра</div>
-          <div className="text-sm text-zinc-300 light:text-zinc-700">
+          <div className="text-sm text-zinc-700 dark:text-zinc-300">
             {report.plan.trim() || "—"}
           </div>
         </div>
         <div>
           <div className="mb-1 text-sm font-medium">Комментарий</div>
-          <div className="text-sm text-zinc-300 light:text-zinc-700">
+          <div className="text-sm text-zinc-700 dark:text-zinc-300">
             {report.comment.trim() || "—"}
           </div>
         </div>

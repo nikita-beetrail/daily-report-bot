@@ -7,8 +7,8 @@ export function AppShell() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-dvh bg-zinc-950 text-zinc-50 light:bg-zinc-50 light:text-zinc-900">
-      <header className="sticky top-0 z-10 border-b border-zinc-900/80 bg-zinc-950/80 backdrop-blur light:border-zinc-200 light:bg-zinc-50/80">
+    <div className="min-h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+      <header className="sticky top-0 z-10 border-b border-zinc-200 bg-zinc-50/80 backdrop-blur dark:border-zinc-900/80 dark:bg-zinc-950/80">
         <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <div className="text-sm font-semibold">Ежедневный отчёт</div>
@@ -21,7 +21,7 @@ export function AppShell() {
                     "rounded-xl px-3 py-1.5 text-xs transition",
                     isActive
                       ? "bg-indigo-500/20 text-indigo-300"
-                      : "text-zinc-400 hover:bg-zinc-900/60 hover:text-zinc-200 light:text-zinc-600 light:hover:bg-zinc-100",
+                      : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-200",
                   )
                 }
               >
@@ -34,7 +34,7 @@ export function AppShell() {
                     "rounded-xl px-3 py-1.5 text-xs transition",
                     isActive
                       ? "bg-indigo-500/20 text-indigo-300"
-                      : "text-zinc-400 hover:bg-zinc-900/60 hover:text-zinc-200 light:text-zinc-600 light:hover:bg-zinc-100",
+                      : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900/60 dark:hover:text-zinc-200",
                   )
                 }
               >
