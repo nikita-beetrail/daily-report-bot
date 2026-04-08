@@ -1,0 +1,2 @@
+export { ReportHistoryPage } from "./ReportHistoryPage";
+
