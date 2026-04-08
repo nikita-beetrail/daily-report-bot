@@ -8,7 +8,7 @@ export function AppShell() {
 
   return (
     <div className="min-h-dvh bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200 bg-zinc-50/90 backdrop-blur dark:border-zinc-900/80 dark:bg-zinc-950/90">
+      <header className="fixed left-0 right-0 top-0 z-50 border-b border-zinc-200 bg-zinc-50 pt-[env(safe-area-inset-top)] dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <div className="text-sm font-semibold">Ежедневный отчёт</div>
@@ -54,7 +54,7 @@ export function AppShell() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl px-4 pb-6 pt-28 sm:pt-24">
+      <main className="mx-auto w-full max-w-3xl px-4 pb-6 pt-[calc(env(safe-area-inset-top)+8.5rem)] sm:pt-[calc(env(safe-area-inset-top)+6.5rem)]">
         <Outlet />
       </main>
     </div>
